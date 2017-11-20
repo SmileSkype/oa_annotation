@@ -1,0 +1,27 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.edu.domain.User" table="user">
+		<id name="uid" type="java.lang.Long" length="5">
+			<column name="uid"></column>
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="username" type="java.lang.String" length="20"></property>
+		<property name="password" type="java.lang.String" length="20"></property>
+		<property name="sex" type="java.lang.String" length="5"></property>
+		<property name="phone" type="java.lang.String" length="20"></property>
+		<property name="email" type="java.lang.String" length="20"></property>
+		
+		<!-- 多对一，用户对部门是多对一的关系,外键-->
+		<many-to-one name="department" class="cn.edu.domain.Department" column="did"></many-to-one>
+		<!-- 多对多，用户和岗位之间是多对多的关系 -->
+		<set name="posts" table="user_post">
+			<key>
+				<column name="uid"></column>
+			</key>
+			<many-to-many class="cn.edu.domain.Post" column="pid"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>
