@@ -1,0 +1,22 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.edu.domain.Post" table="post">
+		<id name="pid" type="java.lang.Long" length="5">
+			<column name="pid"></column>
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="pname" type="java.lang.String" length="20"></property>
+		<property name="description" type="java.lang.String" length="100"></property>
+		
+		<!-- 多对多 -->
+		<set name="users" table="user_post">
+			<key>
+				<column name="pid"></column>
+			</key>
+			<many-to-many class="cn.edu.domain.User" column="uid"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>
