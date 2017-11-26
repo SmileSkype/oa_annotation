@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService {
 		userDao.deleteEntryById(id);
 	}
 
+	public User getUserByUsername(String username) {
+		User user = userDao.getUserByUsername(username);
+		return user;
+	}
+
 }

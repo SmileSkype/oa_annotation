@@ -11,4 +11,5 @@ public interface UserService {
 	public void saveUser(User user);
 	public void updateUser(User user);
 	public void deleteUserById(Serializable id);
+	public User getUserByUsername(String username);
 }

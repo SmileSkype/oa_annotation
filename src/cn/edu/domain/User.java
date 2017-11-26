@@ -13,6 +13,15 @@ public class User implements Serializable {
 	
 	private Department department;
 	private Set<Post> posts;
+	
+	private Set<Menuitem> menuitems;
+	
+	public Set<Menuitem> getMenuitems() {
+		return menuitems;
+	}
+	public void setMenuitems(Set<Menuitem> menuitems) {
+		this.menuitems = menuitems;
+	}
 	public Long getUid() {
 		return uid;
 	}

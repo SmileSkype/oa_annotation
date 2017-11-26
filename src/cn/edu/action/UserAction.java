@@ -7,10 +7,13 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.components.Bean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.DefaultActionInvocation;
 
 import cn.edu.domain.Department;
 import cn.edu.domain.Post;
@@ -34,8 +37,15 @@ public class UserAction extends BaseAction<User> {
 	/**
 	 * 采用属性注入的方式，而不是VO的方式 
 	 */
+	private String message;
 	private Long did;
 	private Long[] pids;
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	public Long getDid() {
 		return did;
 	}
@@ -153,6 +163,38 @@ public class UserAction extends BaseAction<User> {
 		userService.saveUser(user);
 		return action2action;
 	}
+	
+	/**
+	 * 校验用户名是否已经存在，需要返回json数据
+	 */
+	public String getUserByUsername(){
+		
+		int a = 1/0;
+		if(StringUtils.isBlank(this.getModel().getUsername())){
+			this.message = "用户名不能为空";
+			return SUCCESS;
+		}
+		User user = userService.getUserByUsername(this.getModel().getUsername());
+		if(user == null){
+			this.message = "该用户名可以使用";
+		}else{    
+			this.message = "该用户名已经被使用，请重新更换用户名";
+		}   
+		//---------------下面是自定义结果集-------------------
+//		if(StringUtils.isBlank(this.getModel().getUsername())){
+//			ActionContext.getContext().getValueStack().push("用户名不能为空");
+//			return SUCCESS;
+//		}
+//		User user = userService.getUserByUsername(this.getModel().getUsername());
+//		if(user == null){
+//			ActionContext.getContext().getValueStack().push("该用户名可以使用");
+//		}else{
+//			ActionContext.getContext().getValueStack().push("该用户名已经被使用，请重新更换用户名");
+//		}
+		return SUCCESS;
+	}
+	
+	
 	/**
 	 * 测试使用
 	 */

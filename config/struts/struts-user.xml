@@ -12,4 +12,13 @@
 	 		<result name="action2action" type="redirectAction">userAction_getAllUser.action</result>
 	 	</action>
 	 </package> 
+	 
+	 <package name="userJson" namespace="/" extends="json-default">
+	 	<action name="userJsonAction_*" method="{1}" class="userAction">
+	 		<result type="json">
+	 			<param name="root">action</param>
+	 		</result>
+	 	</action>
+	 </package>
+	 
 </struts>

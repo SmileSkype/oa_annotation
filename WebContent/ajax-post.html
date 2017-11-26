@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+	<script src="js/jquery-1.4.2.js"></script>
+  	<script language="JavaScript">
+		$.ajax({
+			url:"TestServlet",
+			type:"POST",
+			success:function(){
+				alert("aaa");
+			},
+			error:function(XMLHttpRequest, textStatus, errorThrown){
+				alert("bbb");
+			}
+		}); 
+  	</script>
+<body>
+	$.post()和Servlet整合测试
+</body>
+</html>
