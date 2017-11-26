@@ -15,4 +15,8 @@ public class MenuitemDaoImpl extends BaseDaoImpl<Menuitem> implements MenuitemDa
 		return (Collection<Menuitem>) this.hibernateTemplate.find("from Menuitem m left join fetch m.users u");
 	}
 
+	public Collection<Menuitem> getMenuitemByParentId(Long pid) {
+		return (Collection<Menuitem>) this.hibernateTemplate.find("from Menuitem where pid = ?", pid);
+	}
+
 }

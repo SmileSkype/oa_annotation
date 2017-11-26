@@ -11,6 +11,15 @@ public class Menuitem implements Serializable {
 	private String icon;  //图标图片地址
 	private Set<User> users;
 	
+	private Boolean checked; //是否选中状态
+	
+	
+	public Boolean getChecked() {
+		return checked;
+	}
+	public void setChecked(Boolean checked) {
+		this.checked = checked;
+	}
 	public Long getMid() {
 		return mid;
 	}

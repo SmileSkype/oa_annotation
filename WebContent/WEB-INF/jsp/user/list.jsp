@@ -3,6 +3,9 @@
 <%@ include file="/WEB-INF/jsp/common/common.jsp" %>
 <script language="javascript" src="${pageContext.request.contextPath}/js/jquery-checkbox.js"></script>
 <script language="javascript" src="${pageContext.request.contextPath}/js/user-list.js"></script>
+<script language="javascript" src="${pageContext.request.contextPath}/js/jquery-ztree-2.5.js"></script>
+<script language="javascript" src="${pageContext.request.contextPath}/js/privilege.js"></script>
+<link rel="stylesheet" href="zTreeStyle/zTreeStyle.css" type="text/css">
 <html>
 <head>
     <title>用户列表</title>
@@ -40,6 +43,7 @@
 	            <tr class="TableDetail1 template">
 	                <td align="center"><input type="checkbox" name="userCheckBox"/></td>
 	                <td align="center"><s:property value="username"/></td>
+	                <s:hidden name="uid"></s:hidden>
 	                <td align="center"><s:property value="department.dname" /></td>
 	                <td align="center">
 	                	<s:iterator value="posts">
@@ -48,7 +52,7 @@
 	                </td>
 	                <td align="center"><s:a action="userAction_delete.action?uid=%{uid}">删除</s:a>
 	                    <s:a action="userAction_updateUI.action?uid=%{uid}">修改</s:a>
-						<a href="javascript:privilegeclick();">设置权限</a>
+						<s:a>设置权限</s:a>
 	                </td>
 	            </tr>
         	</s:iterator>
@@ -62,7 +66,7 @@
     </div>
     
     <div class="ItemBlock_Title1" id="userTitle" style="display: none;"><!-- 信息说明 --><div class="ItemBlock_Title1">
-        	<img border="0" width="4" height="7" src="${pageContext.request.contextPath}/css/blue/images/item_point.gif"/>用户:ww
+        	<img border="0" width="4" height="7" src="${pageContext.request.contextPath}/css/blue/images/item_point.gif"/>
         	<div id="userImage"></div>
         </div>
     <div class="ItemBlock_Title1" id="privilegeTitle" style="display: none;"><div class="ItemBlock_Title1">
@@ -78,7 +82,7 @@
 						<tr align="LEFT" valign="MIDDLE" id="TableTitle">
 							<td width="300px" style="padding-left: 7px;">
 								<!-- 如果把全选元素的id指定为selectAll，并且有函数selectAll()，就会有错。因为有一种用法：可以直接用id引用元素 -->
-								<input type="checkbox" id="allchecked" onchange="privilegeCheckedAll(this.checked,this.id)"/>
+								<input type="checkbox" id="allchecked"/>
 								<label for="cbSelectAll">全选</label>
 							</td>
 						</tr>
@@ -98,7 +102,7 @@
         </div>
         <!-- 表单操作 -->
         <div id="InputDetailBar">
-            <image onclick="savePrivilege()" src="${pageContext.request.contextPath}/css/images/save.png"/>
+            <image id="savePrivilege" src="${pageContext.request.contextPath}/css/images/save.png"/>
         </div>
 </div>
 

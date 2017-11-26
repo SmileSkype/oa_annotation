@@ -10,6 +10,7 @@
 		 <property name="pid" type="java.lang.Long" length="5"></property>
 		 <property name="name" type="java.lang.String" length="20"></property>
 		 <property name="isParent" type="java.lang.Boolean" ></property>
+		 <property name="checked" type="java.lang.Boolean" ></property>
 		 <property name="icon" type="java.lang.String" length="100"></property>
 		 
 		 <!-- 多对多，人与树 -->

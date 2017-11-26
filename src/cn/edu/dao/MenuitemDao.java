@@ -7,4 +7,6 @@ import cn.edu.dao.base.BaseDao;
 public interface MenuitemDao<T> extends BaseDao<T>{
 	
 	public Collection<T> getAllMenuitem();
+	
+	public Collection<T> getMenuitemByParentId(Long pid);
 }

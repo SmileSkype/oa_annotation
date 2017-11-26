@@ -18,5 +18,8 @@ public class MenuitemServiceImpl implements MenuitemService{
 //		return menuitemDao.getAllEntry();
 		return menuitemDao.getAllMenuitem();
 	}
+	public Collection<Menuitem> getMenuitemByParentId(Long pid) {
+		return menuitemDao.getMenuitemByParentId(pid);
+	}
 
 }
