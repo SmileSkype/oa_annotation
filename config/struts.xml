@@ -19,6 +19,10 @@
 	
 	<include file="struts/struts-privilege.xml"></include>
 	
+	<include file="struts/struts-login.xml"></include>
+	
+	<include file="struts/struts-home.xml"></include>
+	
 	<package name="ajax" extends="struts-default">
 		<result-types>
 			<result-type name="ajaxResult" class="cn.edu.result.AjaxResult"></result-type>

@@ -13,7 +13,24 @@ public class Menuitem implements Serializable {
 	
 	private Boolean checked; //是否选中状态
 	
+	private String url;  //路径
+	private String target;  //跳转的方式
 	
+	
+	
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getTarget() {
+		return target;
+	}
+	public void setTarget(String target) {
+		this.target = target;
+	}
 	public Boolean getChecked() {
 		return checked;
 	}

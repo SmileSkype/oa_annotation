@@ -20,12 +20,18 @@ public class MenuitemAction extends BaseAction<Menuitem>{
 	public Collection<Menuitem> getMenuitemList() {
 		return menuitemList;
 	}
-
+	
+	/**
+	 * 一次性加载树
+	 */
 	public String getAllMenuitem(){
 		this.menuitemList = menuitemService.getAllMenuitem();
 		return SUCCESS;
 	}
 	
+	/**
+	 * 点击事件加载树
+	 */
 	public String getMenuitemByParentId(){
 		this.menuitemList = menuitemService.getMenuitemByParentId(this.getModel().getPid());
 		return SUCCESS;

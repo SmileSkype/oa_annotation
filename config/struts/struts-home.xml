@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	 <package name="home" namespace="/" extends="struts-default">
+	 	<action name="homeAction_*" method="{1}" class="homeAction">
+	 		<result name="top">WEB-INF/jsp/frame/top.jsp</result>
+	 		<result name="left">WEB-INF/jsp/frame/left.jsp</result>
+	 		<result name="right">WEB-INF/jsp/frame/right.jsp</result>
+	 		<result name="bottom">WEB-INF/jsp/frame/bottom.jsp</result>
+	 	</action>
+	 </package>
+	 
+</struts>

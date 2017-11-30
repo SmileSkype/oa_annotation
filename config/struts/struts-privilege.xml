@@ -8,6 +8,8 @@
 			<result type="json">
 				<param name="root">action</param>
 			</result>
+			<result name="login">login.jsp</result>
 		</action>
 	</package>
+	
 </struts>

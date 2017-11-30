@@ -4,6 +4,7 @@
 <script language="javascript" src="${pageContext.request.contextPath}/js/jquery-checkbox.js"></script>
 <script language="javascript" src="${pageContext.request.contextPath}/js/user-list.js"></script>
 <script language="javascript" src="${pageContext.request.contextPath}/js/jquery-ztree-2.5.js"></script>
+<script language="javascript" src="${pageContext.request.contextPath}/js/jsonToStr.js"></script>
 <script language="javascript" src="${pageContext.request.contextPath}/js/privilege.js"></script>
 <link rel="stylesheet" href="zTreeStyle/zTreeStyle.css" type="text/css">
 <html>

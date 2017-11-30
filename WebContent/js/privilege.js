@@ -109,14 +109,17 @@ var privilege = {
 			 * 加载权限树
 			 */
 			loadPrivilegeTree:function(){
-				$.post("privilegeAction_showPrivilege.action",null,function(data){
+				var parameter = {
+					uid:privilege.data.user.uid
+				};
+				$.post("privilegeAction_showPrivilege.action",parameter,function(data){
 					privilege.pFunction.privilegeTree.zTree = $("#privilegeTree").zTree(privilege.pFunction.privilegeTree.setting,data.privilegeList);
 					/**
 					 * 这里是设置全选按钮默认状态的最佳位置
 					 * 		默认值必须在点击设置权限的超级链接中设置
 					 * 		确保zTree必须有值
 					 */
-					if(privilege.pFunction.privilegeTree.zTree.getCheckedNodes(false)){
+					if(privilege.pFunction.privilegeTree.zTree.getCheckedNodes(false) != 0){
 //						alert("测试使用");
 						$("#allchecked").attr("checked",false);
 					}else{
@@ -136,7 +139,27 @@ var privilege = {
 			 * 针对某一用户保存权限
 			 */
 			savePrivilege:function(){
-				
+				//获取所有选中的节点
+				var checkedNodes = privilege.pFunction.privilegeTree.zTree.getCheckedNodes(true);
+				//传输简单格式的json格式更简单，拼接字符串
+				var mids = "";
+				for(var i=0;i<checkedNodes.length;i++){
+					if(i<checkedNodes.length-1){
+						mids = mids + checkedNodes[i].mid + ","
+					}else{
+						mids = mids + checkedNodes[i].mid;
+					}
+				}
+				var parameter = {
+					uid:privilege.data.user.uid,
+					mids:mids,
+				};
+//				$.post("privilegeAction_savePrivilege.action",parameter,function(data){
+//					
+//				});
+				$.post("privilegeAction_savePrivilege.action",parameter,function(data){
+					alert("已经保存成功");
+				});
 			},
 			/**
 			 * 全选复选框的实现
