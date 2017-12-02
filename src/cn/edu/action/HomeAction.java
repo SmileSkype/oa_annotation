@@ -27,4 +27,9 @@ public class HomeAction extends ActionSupport{
 	public String bottom(){
 		return "bottom";
 	}
+	
+	//跳转到知识管理页面
+	public String kynamic(){
+		return "kynamic";
+	}
 }

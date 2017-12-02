@@ -23,6 +23,8 @@
 	
 	<include file="struts/struts-home.xml"></include>
 	
+	<include file="struts/struts-kynamic.xml"></include>
+	
 	<package name="ajax" extends="struts-default">
 		<result-types>
 			<result-type name="ajaxResult" class="cn.edu.result.AjaxResult"></result-type>

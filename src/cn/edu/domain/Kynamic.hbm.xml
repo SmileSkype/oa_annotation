@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.edu.domain.Kynamic" table="kynamic">
+		<id name="kid" length="5" type="java.lang.Long">
+			<column name="kid"></column>
+			<generator class="increment"></generator>
+		</id>
+
+	
+		<property name="pid" type="java.lang.Long" length="5"></property>
+		<property name="name" type="java.lang.String" length="20"></property>
+		<property name="icon" type="java.lang.String" length="40"></property>
+		<property name="isParent" type="java.lang.Boolean" ></property>
+		
+		<!-- //知识与版本的关系是一对多 -->
+		<set name="versions" inverse="true">
+			<key>
+				<column name="kid"></column>
+			</key>
+			<one-to-many class="cn.edu.domain.Version"/>
+		</set>
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>右键点击事件</title>
+</head>
+<script type="text/javascript">
+	window.onload = function(){
+		document.getElementById("div").oncontextmenu = function(){
+			alert("哈哈");
+		}
+	}
+</script>
+<body>
+	<div id="div">右键点击事件</div>
+</body>
+</html>

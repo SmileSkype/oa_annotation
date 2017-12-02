@@ -72,7 +72,8 @@ public class PrivilegeDaoImpl extends BaseDaoImpl<Menuitem> implements Privilege
 			return this.getAllEntry();
 		}
 		/**
-		 * 是否可以改为 from User u inner join fetch u.menuList m where u.uid = ?
+		 * 是否可以改为 from User u inner join fetch u.menuitems m where u.uid = ? 不可以
+		 * 原因是我们是为了加载权限树，而不是加载用户，从js端点中也能看到menuitems,但是层次太深
 		 */
 		return (Collection<Menuitem>) this.hibernateTemplate.find("from Menuitem m inner join fetch m.users u where u.uid = ?", user.getUid());
 	}
