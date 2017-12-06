@@ -43,7 +43,30 @@ var kynamic = {
 						});
 					}
 					
+				},
+				click:function(event, treeId, treeNode){
+					/**
+					 * 点击时不能使用pNode,所以必须通过函数进行赋值
+					 */
+					kynamic.kynamicTree.pNode = treeNode;
+					var parameter = {
+						kid:kynamic.kynamicTree.pNode.kid	
+					};
+					$.post("kynamicAction_showVersionByKid.action",parameter,function(data){
+						if(data.versionList.length == 0 ){  //说明没有版本号
+							alert("没有");
+						}else{								//说明有版本号
+							kynamic.version.controlShowVersion({
+								addVersion:false,
+								versionList:true,
+								checkin:false,
+								checkout:false
+							});
+							kynamic.version.showVersionByKid(data.versionList);
+						}
+					});
 				}
+				
 			}
 		},
 		
@@ -273,7 +296,148 @@ var kynamic = {
 	 * 版本的维护
 	 */
 	version:{
-		
+		/**
+		 * 如果当前点击的节点有版本号，则显示版本
+		 */
+		showVersionByKid:function(versionList){
+			/**
+			 * 动态的拼接表格中的数据，拼接之前先将之前的表格清空
+			 */
+			$("#showVersion").empty();
+			for(var i=0;i<versionList.length;i++){
+//				第一种解决方案，使用匿名函数
+//				(function(){
+//					var version = versionList[i].version;
+//					var updateTime = versionList[i].updateTime;
+//					var $versionA = $("<a/>");
+//					$versionA.text(version);
+//					$versionA.css("cursor","pointer");
+//					
+//					$versionA.unbind("click");
+//					$versionA.bind("click",function(){
+//						alert(version); //两次显示的都是2，因为version在循环中只有一个变量，每次都会赋值，保留最后一个赋值的,使用匿名函数，已经解决
+////						alert(versionList[i].version); //undefined
+//					});
+//					
+//					/**
+//					 * click点击事件的函数是在单击时触发的，这段代码所在的函数showVersionByKid,而这个函数在回调函数中
+//					 * 		versionList是传递过来的形参，所以回调函数的生命周期结束以后，该参数就不存在了，
+//					 * 		versionList[i] is undefined
+//					 */
+//					var $versionTD = $("<td/>");
+//					$versionTD.attr("height","26");
+//					$versionTD.attr("align","center");
+//					$versionTD.attr("valign","middle");
+//					$versionTD.attr("bgcolor","#FFFFFF");
+//					$versionTD.attr("style","border-bottom:1px solid #f3f8fd;");
+//					$versionTD.append($versionA);
+//					
+//					var $updateTimeTD = $("<td/>");
+//					$updateTimeTD.attr("align","center");
+//					$updateTimeTD.attr("valign","middle");
+//					$updateTimeTD.attr("bgcolor","#FFFFFF");
+//					$updateTimeTD.attr("style","border-bottom:1px solid #f3f8fd;");
+//					$updateTimeTD.text(updateTime);
+//					
+//					var $A = $("<a/>");
+//					$A.text("删除");
+//					$A.css("cursor","pointer");
+//					var $deleteTD = $("<td/>");
+//					$deleteTD.attr("align","center");
+//					$deleteTD.attr("valign","middle");
+//					$deleteTD.attr("bgcolor","#FFFFFF");
+//					$deleteTD.attr("style","border-bottom:1px solid #f3f8fd;");
+//					$deleteTD.append($A);
+//					
+//					var $TR = $("<tr/>");
+//					$TR.append($versionTD);
+//					$TR.append($updateTimeTD);
+//					$TR.append($deleteTD);
+//					
+//					$("#showVersion").append($TR);
+//				})();
+				
+//				第二种解决方案，比较巧妙，设置为属性
+				var version = versionList[i].version;
+				var updateTime = versionList[i].updateTime;
+				var $versionA = $("<a/>");
+				$versionA.text(version);
+				$versionA.css("cursor","pointer");
+				$versionA.attr("version",version);
+				
+				$versionA.unbind("click");
+				$versionA.bind("click",function(){
+					alert($(this).attr("version")); 
+//					alert(versionList[i].version); //undefined
+				});
+				
+				/**
+				 * click点击事件的函数是在单击时触发的，这段代码所在的函数showVersionByKid,而这个函数在回调函数中
+				 * 		versionList是传递过来的形参，所以回调函数的生命周期结束以后，该参数就不存在了，
+				 * 		versionList[i] is undefined
+				 * 
+				 * 如果在$.ajax()或者在$.post()回调函数中，调用了一个函数，而该函数中又有事件，那么事件中不能直接使用回调函数的形参，
+				 * 因为事件在执行过程中，回调函数已经执行完毕了，形参已经不存在了
+				 */
+				var $versionTD = $("<td/>");
+				$versionTD.attr("height","26");
+				$versionTD.attr("align","center");
+				$versionTD.attr("valign","middle");
+				$versionTD.attr("bgcolor","#FFFFFF");
+				$versionTD.attr("style","border-bottom:1px solid #f3f8fd;");
+				$versionTD.append($versionA);
+				
+				var $updateTimeTD = $("<td/>");
+				$updateTimeTD.attr("align","center");
+				$updateTimeTD.attr("valign","middle");
+				$updateTimeTD.attr("bgcolor","#FFFFFF");
+				$updateTimeTD.attr("style","border-bottom:1px solid #f3f8fd;");
+				$updateTimeTD.text(updateTime);
+				
+				var $A = $("<a/>");
+				$A.text("删除");
+				$A.css("cursor","pointer");
+				var $deleteTD = $("<td/>");
+				$deleteTD.attr("align","center");
+				$deleteTD.attr("valign","middle");
+				$deleteTD.attr("bgcolor","#FFFFFF");
+				$deleteTD.attr("style","border-bottom:1px solid #f3f8fd;");
+				$deleteTD.append($A);
+				
+				var $TR = $("<tr/>");
+				$TR.append($versionTD);
+				$TR.append($updateTimeTD);
+				$TR.append($deleteTD);
+				
+				$("#showVersion").append($TR);
+			}
+		},
+		/**
+		 * 控制两个div和checkin，checkout的显示
+		 */
+		controlShowVersion:function(versionJsonShow){
+			
+			if(versionJsonShow.addVersion){
+				$("#addVersion").show();
+			}else{
+				$("#addVersion").hide();
+			}
+			if(versionJsonShow.versionList){
+				$("#versionList").show();
+			}else{
+				$("#versionList").hide();
+			}
+			if(versionJsonShow.checkin){
+				$("#checkin").show();
+			}else{
+				$("#checkin").hide();
+			}
+			if(versionJsonShow.checkout){
+				$("#checkout").show();
+			}else{
+				$("#checkout").hide();
+			}
+		}
 	}
 }
 $().ready(function(){

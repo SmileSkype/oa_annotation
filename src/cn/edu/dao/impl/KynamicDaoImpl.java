@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import cn.edu.dao.KynamicDao;
 import cn.edu.dao.base.BaseDaoImpl;
 import cn.edu.domain.Kynamic;
+import cn.edu.domain.Version;
 @Repository("kynamicDao")
 public class KynamicDaoImpl extends BaseDaoImpl<Kynamic> implements KynamicDao<Kynamic>{
 	
@@ -63,6 +64,9 @@ public class KynamicDaoImpl extends BaseDaoImpl<Kynamic> implements KynamicDao<K
 		return kynamicList.get(0);
 	}
 	
-	
+	public Collection<Version> getVersionByKid(Long kid) {
+		List<Version> versionList = (List<Version>) this.hibernateTemplate.find("from Version v where v.kynamic.kid = ?", kid);
+		return versionList;
+	}
 
 }

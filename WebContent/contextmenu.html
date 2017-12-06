@@ -9,9 +9,37 @@
 		document.getElementById("div").oncontextmenu = function(){
 			alert("哈哈");
 		}
+		var name = "The Window";
+
+		var object = {
+		　　　　name : "My Object",
+
+		　　　　getNameFunc : function(){
+		　　　　　　return function(){
+		　　　　　　　　return this.name;
+		　　　　　　};
+
+		　　　　}
+
+		　　};
+
+		alert(object.getNameFunc().call(object));
+		var object1 = {
+			name : "My Object",
+
+		　　　　getNameFunc : function(){
+		　　　　　　var that = this;
+		　　　　　　return function(){
+		　　　　　　　　return that.name;
+		　　　　　　};
+
+		　　　　}	
+		};
+		alert(object1.getNameFunc()()); 
 	}
 </script>
 <body>
 	<div id="div">右键点击事件</div>
+	也测试js的闭包问题
 </body>
 </html>

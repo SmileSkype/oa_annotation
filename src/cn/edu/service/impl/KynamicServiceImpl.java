@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.edu.dao.KynamicDao;
 import cn.edu.domain.Kynamic;
+import cn.edu.domain.Version;
 import cn.edu.service.KynamicService;
 @Service("kynamicService")
 public class KynamicServiceImpl implements KynamicService {
@@ -65,6 +66,11 @@ public class KynamicServiceImpl implements KynamicService {
 	public Kynamic getKynamicById(Long kid) {
 		// TODO Auto-generated method stub
 		return (Kynamic) kynamicDao.getEntryById(kid);
+	}
+	
+	public Collection<Version> getVersionByKid(Long kid) {
+		// TODO Auto-generated method stub
+		return kynamicDao.getVersionByKid(kid);
 	}
 
 }

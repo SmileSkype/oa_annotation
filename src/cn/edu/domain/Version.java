@@ -3,6 +3,8 @@ package cn.edu.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.apache.struts2.json.annotations.JSON;
+
 public class Version implements Serializable {
 	private Long vid;
 	private Long version;  //版本号
@@ -54,7 +56,7 @@ public class Version implements Serializable {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-
+	@JSON(serialize=false)
 	public Kynamic getKynamic() {
 		return kynamic;
 	}

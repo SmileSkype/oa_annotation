@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import cn.edu.dao.base.BaseDao;
 import cn.edu.domain.Kynamic;
+import cn.edu.domain.Version;
 
 public interface KynamicDao<T> extends BaseDao<T> {
 
@@ -13,5 +14,5 @@ public interface KynamicDao<T> extends BaseDao<T> {
 
 	public Kynamic getParentNode(Long kid);
 	
-	
+	public Collection<Version> getVersionByKid(Long kid);
 }

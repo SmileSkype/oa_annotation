@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import cn.edu.domain.Kynamic;
+import cn.edu.domain.Version;
 import cn.edu.service.KynamicService;
 @Controller("kynamicAction")
 @Scope("prototype")
@@ -22,7 +23,13 @@ public class KynamicAction extends BaseAction<Kynamic> {
 	private String message;
 	private Kynamic kynamic;
 	
+	private Collection<Version> versionList;
 	
+	
+	
+	public Collection<Version> getVersionList() {
+		return versionList;
+	}
 	public Kynamic getKynamic() {
 		return kynamic;
 	}
@@ -108,4 +115,11 @@ public class KynamicAction extends BaseAction<Kynamic> {
 		return SUCCESS;
 	}
 	
+	/**
+	 * 根据kynamic节点的kid查询version数据
+	 */
+	public String showVersionByKid(){
+		this.versionList = kynamicService.getVersionByKid(this.getModel().getKid());
+		return SUCCESS;
+	}
 }

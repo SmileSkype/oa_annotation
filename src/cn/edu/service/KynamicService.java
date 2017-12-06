@@ -3,6 +3,7 @@ package cn.edu.service;
 import java.util.Collection;
 
 import cn.edu.domain.Kynamic;
+import cn.edu.domain.Version;
 
 public interface KynamicService {
 	public void saveKynamic(Kynamic kynamic);
@@ -18,4 +19,6 @@ public interface KynamicService {
 	public void deleteNode(Long kid);
 
 	public Kynamic getKynamicById(Long kid);
+	
+	public Collection<Version> getVersionByKid(Long kid);
 }
